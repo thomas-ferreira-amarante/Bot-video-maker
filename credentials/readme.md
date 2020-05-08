@@ -2,7 +2,7 @@
 
 ## Algorithmia
 
-File: `algorithmia.json`
+File: `algorithmia.json` 
 
 ```
 {

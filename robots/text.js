@@ -4,7 +4,7 @@ const sentenceBoundaryDetection = require('sbd')
 
 async function robot(content) {
 	await fecthContentFromWikipedia(content)
-	sanitizeContent(content)
+	sanitizeContent(content) 
 	breakContentIntoSentences(content)
 
 	async function fecthContentFromWikipedia(content) {

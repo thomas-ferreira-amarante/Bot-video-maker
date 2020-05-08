@@ -4,7 +4,7 @@ const robots = {
 }
 async function start() {
 
-	const content = {}
+	const content = {} 
 
 // Criando objetos que recebem o resutato das funções abaixo 
 	content.searchTerm = askAndReturnSearchTerm()
