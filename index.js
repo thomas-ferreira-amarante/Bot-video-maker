@@ -4,7 +4,9 @@ const robots = {
 }
 async function start() {
 
-	const content = {} 
+	const content = {
+		maximumSentences: 7
+	} 
 
 // Criando objetos que recebem o resutato das funções abaixo 
 	content.searchTerm = askAndReturnSearchTerm()
@@ -30,7 +32,7 @@ async function start() {
 		return selectedPrefixText
 	}
 //Exibirá todas as constantes (content.searchTerm e content.prefix)
-	console.log(content)
+	console.log(JSON.stringify(content, null, 4))
 }
 
 start()
