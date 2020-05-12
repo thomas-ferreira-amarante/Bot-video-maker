@@ -5,19 +5,28 @@ const sentenceBoundaryDetection = require('sbd')
 const watsonApiKey = require('../credentials/watson-nlu.json').apikey
 const NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js')
  
-var nlu = new NaturalLanguageUnderstandingV1({
+ //criando objeto para IBM Watson
+const nlu = new NaturalLanguageUnderstandingV1({
   iam_apikey: watsonApiKey,
   version: '2018-04-05',
   url: 'https://gateway.watsonplatform.net/natural-language-understanding/api/'
 })
 
+// Importando Robô que salva e carrega as informações
+const state = require('./state.js')
 
-async function robot(content) {
+async function robot() {
+	//chamando conteúdo previamente carregado
+	const content = state.load()
+
 	await fecthContentFromWikipedia(content)
 	sanitizeContent(content) 
 	breakContentIntoSentences(content)
 	limitMaximumSentences(content)
 	await fetchKeywordsOfAllSentences(content)
+	
+	// Salvando o conteúdo
+	state.save(content)
 
 	async function fecthContentFromWikipedia(content) {
 		
