@@ -79,7 +79,7 @@ async function robot() {
 	//salva a imagem no local
 	async function downloadAndSave(url, fileName) {
 		return imageDownloader.image({
-			url, url,
+			url: url,
 			dest: `./content/${fileName}`
 		})
 	}
