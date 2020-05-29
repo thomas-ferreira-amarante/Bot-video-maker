@@ -12,6 +12,7 @@ const googleSearchCredentials = require('../credentials/google-search.json')
 
 
 async function robot() {
+	console.log('> [Image-robot] Starting...')
 	const content = state.load()
 
 	await fetchImagesOfAllSentences(content)
@@ -23,6 +24,7 @@ async function robot() {
 	async function fetchImagesOfAllSentences(content) {
 		for (const sentence of content.sentences) {
 			const query = `${content.searchTerm} ${sentence.keywords[0]}`
+			console.log(`> [Image-robot] Querying Google Images with: "${query}"`)
 			sentence.images = await fetchGoogleAndReturnImagesLinks(query)
 
 			sentence.googleSearchQuery = query
@@ -61,15 +63,15 @@ async function robot() {
 				try {
 					// Verificando se a imagem que está sendo baixada já existe para acusar erro de imagem duplicada!
 					if (content.downloadedImages.includes(imageUrl)) {
-						throw new Error('Imagem já foi baixada!')
+						throw new Error('Image already downloaded')
 					}
 
 					await downloadAndSave(imageUrl, `${sentenceIndex}-original.png`)
 					content.downloadedImages.push(imageUrl)
-					console.log(`> [${sentenceIndex}][${imageIndex}] A Imagem foi baixada com sucesso!: ${imageUrl}`)
+					console.log(`> [Image-robot] [${sentenceIndex}][${imageIndex}] Image successfully downloaded: ${imageUrl}`)
 					break
 				} catch(error) {
-					console.log(`> [${sentenceIndex}][${imageIndex}] Erro ao baixar a imagem (${imageUrl}): ${error}`)
+					console.log(`> [Image-robot] [${sentenceIndex}][${imageIndex}] Error (${imageUrl}): ${error}`)
 				}
 				
 			}
@@ -79,7 +81,7 @@ async function robot() {
 	//salva a imagem no local
 	async function downloadAndSave(url, fileName) {
 		return imageDownloader.image({
-			url, url,
+			url: url,
 			dest: `./content/${fileName}`
 		})
 	}
