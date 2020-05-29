@@ -1,6 +1,6 @@
-const gm = require('gm').subClass({imageMagick: true})
-const state = require('./state.js')
-const spawn = require('child_process').spawn
+ const gm = require('gm').subClass({imageMagick: true})
+ const state = require('./state.js')
+ const spawn = require('child_process').spawn
  const path = require('path')
  const rootPath = path.resolve(__dirname, '..')
 
@@ -139,7 +139,7 @@ async function convertImage(sentenceIndex){
 
    async function renderVideoWithAfterEffects() {
      return new Promise((resolve, reject) => {
-       const aerenderFilePath = '/Applications/Adobe After Effects CC 2019/aerender'
+       const aerenderFilePath = '/Applications/Adobe After Effects 2020/aerender'
        const templateFilePath = `${rootPath}/templates/1/template.aep`
        const destinationFilePath = `${rootPath}/content/output.mov`
 
